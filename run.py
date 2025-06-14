@@ -35,6 +35,7 @@ def get_sales_data():
 
     return sales_data
 
+
 def validate_data(values):
     """
     Validate the input data to ensure it is a list of six integers.
@@ -42,7 +43,6 @@ def validate_data(values):
     """
     try:
         [int(value) for value in values]  # Convert all values to integers
-        
         if len(values) != 6:
             raise ValueError(
                 f"Exactly six values required, you provided {len(values)}"
@@ -50,7 +50,6 @@ def validate_data(values):
     except ValueError as e:
         print(f"Invalid data: {e}. Please try again\n")
         return False
-    
     return True
 
 
@@ -68,11 +67,11 @@ def validate_data(values):
 # def update_surplus_worksheet(surplus_data):
 #     """
 #     Update the surplus worksheet with the calculated surplus data.
-#     """ 
+#     """
 #     print("Updating surplus worksheet...\n")
 #     surplus_worksheet = SHEET.worksheet("surplus")
 #     surplus_worksheet.append_row(surplus_data)
-#     print("Surplus worksheet updated successfully.\n")    
+#     print("Surplus worksheet updated successfully.\n"
 
 
 def update_worksheet(data, worksheet):
@@ -99,7 +98,6 @@ def calculate_surplus_data(sales_row):
     for stock, sales in zip(stock_row, sales_row):
         surplus = int(stock) - sales
         surplus_data.append(surplus)
-    
     return surplus_data
 
 
@@ -116,6 +114,7 @@ def get_last_5_entries_sales():
         columns.append(column[-5:])
     return columns
 
+
 def calculate_stock_data(data):
     """
     Calculate the average stock data for each sandwich type.
@@ -129,8 +128,8 @@ def calculate_stock_data(data):
         average = sum(int_column) / len(int_column)
         stock_num = round(average * 1.1)
         new_stock_data.append(stock_num)
-    
     return new_stock_data
+
 
 def main():
     """
