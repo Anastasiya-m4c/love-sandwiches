@@ -1,7 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 
-SCOPE = [n
+SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
@@ -31,8 +31,6 @@ def get_sales_data():
         if validate_data(sales_data):
             print("Data is valid!")
             break
-        else:
-            print("Invalid data, please try again.\n")
 
     return sales_data
 
@@ -51,7 +49,20 @@ def validate_data(values):
             )
     except ValueError as e:
         print(f"Invalid data: {e}. Please try again\n")
-
+        return False
+    
     return True
 
-get_sales_data()
+def update_sales_worksheet(data):
+    """
+    Update the sales worksheet with the provided data.
+    """
+    print("Updating sales worksheet...\n")
+    # Open the sales worksheet and append the data
+    sales_worksheet = SHEET.worksheet("sales")
+    sales_worksheet.append_row(data)
+    print("Sales worksheet updated successfully.\n")
+
+data = get_sales_data()
+sales_data = [int(num) for num in data]
+update_sales_worksheet(sales_data)
